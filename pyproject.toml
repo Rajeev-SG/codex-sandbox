@@ -1,0 +1,42 @@
+[project]
+name = "codex-sandbox"
+version = "0.1.0"
+description = "Sandbox repo for Codex Cloud readiness."
+requires-python = ">=3.11"
+
+[tool.black]
+line-length = 88
+
+[tool.ruff]
+line-length = 88
+select = ["E", "F", "I", "N", "C901", "B"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_unused_configs = true
+
+[tool.pytest.ini_options]
+addopts = "-ra --strict-markers"
+python_files = ["test_*.py"]
+testpaths = ["tests"]
+
+[tool.coverage.run]
+branch = true
+source = ["codex_sandbox"]
+
+[tool.coverage.report]
+fail_under = 85
+show_missing = true
+
+[tool.deptry]
+ignore_missing = ["prometheus_client", "opentelemetry", "sentry_sdk", "posthog"]
+
+[tool.pylint."MESSAGES CONTROL"]
+disable = ["missing-module-docstring", "missing-class-docstring", "missing-function-docstring"]
+
+[tool.pylint."DESIGN"]
+max-args = 6
+
+[tool.pylint."SIMILARITIES"]
+min-similarity-lines = 4
