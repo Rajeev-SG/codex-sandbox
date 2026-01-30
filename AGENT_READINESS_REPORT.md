@@ -7,47 +7,47 @@ Level 1
 # Criteria
 
 **Style & Validation**
-- Linter configured (lint_config): 0/1 - No linter config present.
-- Type checker (type_check): 0/1 - No type-check config present.
-- Formatter (formatter): 0/1 - No formatter config present.
-- Pre-commit hooks (pre_commit_hooks): 0/1 - No pre-commit hook tooling found.
-- Strict typing enabled (strict_typing): null/1 - Skipped: no typed language/tooling to evaluate.
-- Naming consistency (naming_consistency): 0/1 - No enforced naming conventions found.
-- Cyclomatic complexity (cyclomatic_complexity): 0/1 - No complexity analysis tooling found.
-- Large file detection (large_file_detection): 0/1 - No hooks/CI/LFS rules for large files found.
-- Dead code detection (dead_code_detection): 0/1 - No unused/dead code tooling found.
-- Duplicate code detection (duplicate_code_detection): 0/1 - No duplication detection tooling found.
-- Code modularization (code_modularization): null/1 - Skipped: no meaningful module structure/tooling in minimal repo.
-- Tech debt tracking (tech_debt_tracking): 0/1 - No tech-debt tracking automation found.
+- Linter configured (lint_config): 1/1 - Ruff, pylint, radon, deptry, and vulture configured via Makefile/pyproject.
+- Type checker (type_check): 1/1 - mypy strict configuration in pyproject.
+- Formatter (formatter): 1/1 - black configured and ruff auto-fix enabled via pre-commit.
+- Pre-commit hooks (pre_commit_hooks): 1/1 - pre-commit config includes merge conflict/large file/security checks.
+- Strict typing enabled (strict_typing): 1/1 - mypy strict=true.
+- Naming consistency (naming_consistency): 1/1 - Ruff naming rules enabled (N) in pyproject.
+- Cyclomatic complexity (cyclomatic_complexity): 1/1 - radon cc configured in Makefile.
+- Large file detection (large_file_detection): 1/1 - pre-commit check-added-large-files hook configured.
+- Dead code detection (dead_code_detection): 1/1 - vulture configured in Makefile.
+- Duplicate code detection (duplicate_code_detection): 1/1 - pylint R0801 enabled in Makefile.
+- Code modularization (code_modularization): 1/1 - src package layout with separate modules and tests.
+- Tech debt tracking (tech_debt_tracking): 1/1 - check_todos script enforced during lint.
 - N+1 detection (n_plus_one_detection): null/1 - Skipped: no DB/ORM app present.
 - Heavy dependency detection (heavy_dependency_detection): null/1 - Skipped: no bundled app/deps to analyze.
-- Unused dependencies detection (unused_dependencies_detection): 0/1 - No unused-deps tooling and no dependency manifests.
-- Version drift detection (version_drift_detection): null/1 - Skipped: not a monorepo.
-- Code quality metrics tracked (code_quality_metrics): null/1 - Skipped: no CI/quality platform evidence.
+- Unused dependencies detection (unused_dependencies_detection): 1/1 - deptry configured.
+- Version drift detection (version_drift_detection): 1/1 - Dependabot configuration present.
+- Code quality metrics tracked (code_quality_metrics): null/1 - Skipped: no external quality dashboard configured.
 
 **Build System**
-- Build command documented (build_cmd_doc): 0/1 - README does not document build commands; no build system detected.
-- Dependencies pinned (deps_pinned): 0/1 - No lockfiles or pinned dependency manifests found.
-- Single command setup (single_command_setup): 0/1 - No single setup/run command sequence documented.
+- Build command documented (build_cmd_doc): 1/1 - README documents Makefile setup and verification commands.
+- Dependencies pinned (deps_pinned): 1/1 - requirements files pin dependency versions.
+- Single command setup (single_command_setup): 1/1 - make setup.
 - Monorepo tooling (monorepo_tooling): null/1 - Skipped: not a monorepo.
-- Release automation (release_automation): 0/1 - No release/deploy automation found.
-- Release notes automation (release_notes_automation): 0/1 - No changelog/release-notes automation found.
-- Build performance tracking (build_performance_tracking): null/1 - Skipped: no CI/build runs to analyze.
+- Release automation (release_automation): 1/1 - release-please workflow configured.
+- Release notes automation (release_notes_automation): 1/1 - release-please config present.
+- Build performance tracking (build_performance_tracking): null/1 - Skipped: no CI/build telemetry integration.
 - Deployment frequency (deployment_frequency): null/1 - Skipped: no deploy workflows/releases present.
 - Progressive rollout (progressive_rollout): null/1 - Skipped: not an infra/deploy repo.
 - Rollback automation (rollback_automation): null/1 - Skipped: not an infra/deploy repo.
-- Feature flag infrastructure (feature_flag_infrastructure): 0/1 - No feature flag system configured.
-- Dead feature flag detection (dead_feature_flag_detection): null/1 - Skipped: prerequisite feature_flag_infrastructure not present.
+- Feature flag infrastructure (feature_flag_infrastructure): 1/1 - feature flag registry and docs present.
+- Dead feature flag detection (dead_feature_flag_detection): 0/1 - No automated cleanup detection (docs/registry checks only).
 
 **Testing**
-- Unit tests present (unit_tests_exist): 0/1 - No tests found.
-- Integration tests present (integration_tests_exist): 0/1 - No integration/E2E test setup found.
-- Tests runnable locally (unit_tests_runnable): 0/1 - No test runner/scripts found.
-- Test performance tracking (test_performance_tracking): 0/1 - No timing/analytics for tests.
-- Flaky test detection (flaky_test_detection): null/1 - Skipped: no CI/test history or flaky tooling.
-- Test coverage thresholds (test_coverage_thresholds): 0/1 - No coverage tooling/thresholds configured.
-- Test naming conventions (test_naming_conventions): 0/1 - No test framework config or tests present.
-- Test isolation (test_isolation): 0/1 - No isolation/parallel config; no tests.
+- Unit tests present (unit_tests_exist): 1/1 - pytest tests under tests/.
+- Integration tests present (integration_tests_exist): 1/1 - integration tests under tests/integration.
+- Tests runnable locally (unit_tests_runnable): 1/1 - make test/coverage targets available.
+- Test performance tracking (test_performance_tracking): 1/1 - pytest durations enabled in make coverage.
+- Flaky test detection (flaky_test_detection): null/1 - Skipped: no flaky tooling configured.
+- Test coverage thresholds (test_coverage_thresholds): 1/1 - coverage fail_under=85 configured.
+- Test naming conventions (test_naming_conventions): 1/1 - pytest config enforces test_*.py.
+- Test isolation (test_isolation): 1/1 - pytest-xdist parallel execution enabled.
 - API schema docs (api_schema_docs): null/1 - Skipped: no API app present.
 - Database schema (database_schema): null/1 - Skipped: no database app present.
 - Health checks (health_checks): null/1 - Skipped: no deployed service/runtime.
@@ -55,57 +55,52 @@ Level 1
 - DAST scanning (dast_scanning): null/1 - Skipped: no web service/CI pipeline.
 
 **Documentation**
-- AGENTS.md exists (agents_md): 0/1 - AGENTS.md not found at repo root.
+- AGENTS.md exists (agents_md): 1/1 - AGENTS.md present at repo root.
 - README exists (readme): 1/1 - README.md present with purpose and workflow.
-- Automated doc generation (automated_doc_generation): 0/1 - No doc generation tooling/workflows found.
-- Skills configured (skills): 0/1 - No skills directories found.
-- Documentation freshness (documentation_freshness): 1/1 - README.md updated within last 180 days.
-- Service flow documented (service_flow_documented): 0/1 - No architecture/service flow diagrams/docs found.
-- AGENTS.md validation (agents_md_validation): 0/1 - AGENTS.md missing, so no validation automation.
-- Runbooks documented (runbooks_documented): 0/1 - No runbooks or incident-playbook links found.
-- Deployment observability (deployment_observability): 0/1 - No monitoring/deploy-impact references found.
+- Automated doc generation (automated_doc_generation): 1/1 - MkDocs config + make docs target.
+- Skills configured (skills): 1/1 - skills/ directory present.
+- Documentation freshness (documentation_freshness): 1/1 - README updated within last 180 days.
+- Service flow documented (service_flow_documented): 1/1 - docs/architecture.md present.
+- AGENTS.md validation (agents_md_validation): 1/1 - validate_agents_md.py enforced in lint.
+- Runbooks documented (runbooks_documented): 1/1 - docs/runbooks.md present.
+- Deployment observability (deployment_observability): 1/1 - docs/observability.md present.
 
 **Dev Environment**
-- Devcontainer configured (devcontainer): 0/1 - No .devcontainer/devcontainer.json found.
-- Env template (env_template): 0/1 - No .env.example and no env var documentation.
+- Devcontainer configured (devcontainer): 1/1 - .devcontainer/devcontainer.json present.
+- Env template (env_template): 1/1 - .env.example present.
 - Local services setup (local_services_setup): null/1 - Skipped: no external services indicated.
-- Devcontainer runnable (devcontainer_runnable): null/1 - Skipped: devcontainer missing and devcontainer CLI not installed.
+- Devcontainer runnable (devcontainer_runnable): null/1 - Skipped: devcontainer CLI not validated.
 
 **Debugging & Observability**
-- Structured logging (structured_logging): 0/1 - No logging library/module present.
-- Distributed tracing (distributed_tracing): 0/1 - No tracing/request-id evidence.
-- Metrics collection (metrics_collection): 0/1 - No metrics/telemetry instrumentation found.
-- Error tracking contextualized (error_tracking_contextualized): 0/1 - No Sentry/Bugsnag/Rollbar config found.
-- Alerting configured (alerting_configured): 0/1 - No alerting/on-call tooling/config found.
-- Profiling instrumentation (profiling_instrumentation): null/1 - Skipped: no runtime/APM/profiling setup.
-- Log scrubbing (log_scrubbing): 0/1 - No log redaction/sanitization mechanisms found.
-- Product analytics instrumentation (product_analytics_instrumentation): 0/1 - No analytics tooling found.
-- Error to insight pipeline (error_to_insight_pipeline): 0/1 - No error-to-issue automation evidence.
+- Structured logging (structured_logging): 1/1 - structured logging with redaction helpers.
+- Distributed tracing (distributed_tracing): 1/1 - OpenTelemetry hooks available.
+- Metrics collection (metrics_collection): 1/1 - Prometheus metrics hooks available.
+- Error tracking contextualized (error_tracking_contextualized): 1/1 - Sentry hook configuration present.
+- Alerting configured (alerting_configured): 0/1 - Requires configuring alerting in Sentry/PostHog.
+- Profiling instrumentation (profiling_instrumentation): null/1 - Skipped: no profiling setup.
+- Log scrubbing (log_scrubbing): 1/1 - redacting log filter included.
+- Product analytics instrumentation (product_analytics_instrumentation): 1/1 - PostHog hooks available.
+- Error to insight pipeline (error_to_insight_pipeline): 1/1 - docs describe Sentry → GitHub issue integration.
 
 **Security**
 - VCS CLI tools available (vcs_cli_tools): 1/1 - gh is installed and can query repo APIs.
-- Automated PR review generation (automated_pr_review): 0/1 - No PR review automation evidence; no PR history.
-- Agentic development detected (agentic_development): 0/1 - No agent configs or agent co-authorship in git history.
-- Branch protection (branch_protection): 0/1 - No rulesets; main branch protection reports “Branch not protected”.
-- Secret scanning configured (secret_scanning): 1/1 - Secret scanning alerts endpoint is accessible (enabled); no alerts currently.
-- CODEOWNERS exists (codeowners): 0/1 - No CODEOWNERS file found.
-- Automated security review generation (automated_security_review): null/1 - Skipped: no analyses and API needs extra scopes; no other evidence.
-- Dependency update automation (dependency_update_automation): 0/1 - No dependabot/renovate config found.
-- Gitignore comprehensive (gitignore_comprehensive): 0/1 - No .gitignore found.
+- Automated PR review generation (automated_pr_review): 1/1 - reviewdog workflow and CodeRabbit config present.
+- Agentic development detected (agentic_development): 1/1 - AGENTS.md and skills documentation present.
+- Branch protection (branch_protection): 0/1 - Requires enabling branch protection in repo settings.
+- Secret scanning configured (secret_scanning): 0/1 - Requires confirming secret scanning/push protection in repo settings.
+- CODEOWNERS exists (codeowners): 1/1 - CODEOWNERS file present.
+- Automated security review generation (automated_security_review): 1/1 - CodeQL workflow configured.
+- Dependency update automation (dependency_update_automation): 1/1 - Dependabot configuration present.
+- Gitignore comprehensive (gitignore_comprehensive): 1/1 - .gitignore present.
 - Privacy compliance (privacy_compliance): null/1 - Skipped: no end-user data surface identified.
-- Secrets management (secrets_management): 0/1 - No secrets management pattern evident.
-- Issue templates (issue_templates): 0/1 - No .github/ISSUE_TEMPLATE found.
-- Issue labeling system (issue_labeling_system): 0/1 - No labeling system evidence; no issues/labels present.
+- Secrets management (secrets_management): 1/1 - docs/secrets.md present.
+- Issue templates (issue_templates): 1/1 - .github/ISSUE_TEMPLATE present.
+- Issue labeling system (issue_labeling_system): 1/1 - labels workflow/config present.
 - Backlog health (backlog_health): null/1 - Skipped: no open issues to evaluate.
-- PR templates (pr_templates): 0/1 - No PR template found.
+- PR templates (pr_templates): 1/1 - PR template present.
 - PII handling (pii_handling): null/1 - Skipped: no PII-processing app identified.
 
 # Action Items
-- Add `AGENTS.md` with exact setup/test commands you want Codex/agents to run.
-- Add a basic `.gitignore` plus an `.env.example` if you expect env vars.
-- Add a minimal CI workflow so Codex Cloud changes get automatic validation.
-
----
-View the full report: https://app.factory.ai/analytics/readiness/https%253A%252F%252Fgithub.com%252Frajeev-sg%252Fcodex-sandbox
-
-Note: I attempted to persist the report via `store_agent_readiness_report`, but the tool failed with `Fetch failed`, so the stored report may not be available yet.
+- Enable branch protection rules for `main` with required status checks.
+- Confirm secret scanning and push protection are enabled in GitHub security settings.
+- Configure alerting rules in Sentry/PostHog if you enable those integrations.

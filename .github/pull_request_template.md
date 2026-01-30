@@ -4,7 +4,10 @@
 
 ## Verification
 
-- [ ] No automated checks exist for this repo yet (add them if you introduce tooling)
+- [ ] `make lint`
+- [ ] `make typecheck`
+- [ ] `make coverage`
+- [ ] `make docs`
 
 ## AI review tools (free-tier friendly)
 
