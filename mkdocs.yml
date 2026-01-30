@@ -1,0 +1,15 @@
+site_name: Codex Sandbox
+site_description: Agent readiness documentation for the codex-sandbox repo.
+nav:
+  - Home: index.md
+  - Architecture: architecture.md
+  - Runbooks: runbooks.md
+  - Observability: observability.md
+  - Feature Flags: feature_flags.md
+  - Tech Debt: tech_debt.md
+  - Secrets: secrets.md
+markdown_extensions:
+  - admonition
+  - tables
+  - toc:
+      permalink: true
